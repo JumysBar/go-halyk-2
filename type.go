@@ -5,7 +5,7 @@ import (
 	"reflect"
 )
 
-// MyMegaInteger тип для кастомизации базового типа int32
+// MyMegaInteger тип для кастомизации базового типа int
 type MyMegaInteger int
 
 // getAndIncrease возвращает текущее значение MyMegaInteger после чего инкриминирует его на единицу
@@ -45,11 +45,11 @@ func main() {
 }
 
 /* output
-	6 main.MyMegaInteger
-	6 int
-	6 main.MyMegaInteger
+6 main.MyMegaInteger
+6 int
+6 main.MyMegaInteger
 
-	3
-	3
-	4
+3
+3
+4
 */
