@@ -40,13 +40,11 @@ func main() {
 		},
 	}
 
-
 	// то же самое: (&course).SetName(...)
 	// просто компилятор Golang сжалился над нами и позволят не указывать, что обращение идет адресу явно
 	course.SetName("Якубович Леонид Аркадьевич")
 	course.WrongSetName("ничего не произойдет, кроме пустой растраты ресурсов")
 	fmt.Printf("course: %#v\n", course)
-
 
 	courseTwo := new(Course)
 	courseTwo.SetName("вызов структуры через new()")

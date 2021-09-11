@@ -39,10 +39,10 @@ func main() {
 	}()
 
 	// Вызов цепочки функций и обработка ошибки
-	err := firstLayer("some_permission")
+	err := firstLayer()
 	if err != nil {
 		// #1
-		//panic(fmt.Sprintf("main: %s", err))
+		panic(fmt.Sprintf("main: %s", err))
 
 		// #2
 		//if e, ok := err.(*QueryError); ok && e.Err == ErrPermission {
@@ -57,18 +57,18 @@ func main() {
 		//}
 
 		// #4
-		var targetErr *QueryError
-		if errors.As(err, &targetErr) {
-			if errors.Is(err, ErrPermission) {
-				panic(fmt.Sprintf("main with errors.Is() and errors.As(): %s", err))
-			}
-		}
+		//var targetErr *QueryError
+		//if errors.As(err, &targetErr) {
+		//	if errors.Is(err, ErrPermission) {
+		//		panic(fmt.Sprintf("main with errors.Is() and errors.As(): %s", err))
+		//	}
+		//}
 	}
 	fmt.Printf("unexapted error")
 }
 
-func firstLayer(name string) error {
-	err := secondLayer(name)
+func firstLayer() error {
+	err := secondLayer()
 	if err != nil {
 		// #1
 		//return fmt.Errorf("firstLayer: %s", err)
@@ -88,40 +88,40 @@ func firstLayer(name string) error {
 	return nil
 }
 
-//func secondLayer(name string) error {
-//	// #1
-//	return fmt.Errorf("secondLayer: %v - %v", name, ErrPermission)
-//
-//	// #2
-//	//return &QueryError{
-//	//	Query: fmt.Sprintf("secondLayer: %v - %v", name, err),
-//	//	Err:   ErrPermission,
-//	//}
-//
-//	// #3
-//	//return fmt.Errorf("secondLayer: %w", ErrPermission)
-//
-//	// #4
-//	//return fmt.Errorf("secondLayer: %w", &QueryError{
-//	//	ErrPermission.Error(),
-//	//	ErrPermission,
-//	//})\
-//}
+func secondLayer() error {
+	// #1
+	return fmt.Errorf("secondLayer: %v", ErrPermission)
+
+	// #2
+	//return &QueryError{
+	//	Query: fmt.Sprintf("secondLayer: %v - %v", name, err),
+	//	Err:   ErrPermission,
+	//}
+
+	// #3
+	//return fmt.Errorf("secondLayer: %w", ErrPermission)
+
+	// #4
+	//return fmt.Errorf("secondLayer: %w", &QueryError{
+	//	ErrPermission.Error(),
+	//	ErrPermission,
+	//})
+}
 
 // Bonus
-func secondLayer(name string) (err error) {
-	defer wrapError(&err, ErrPermission.Error())
-
-	return ErrPermission
-}
-
-var ErrSecondLayer = errors.New("secondLayer")
-
-func wrapError(err *error, msg string) {
-	if *err != nil {
-		*err = &QueryError{
-			Err:   *err,
-			Query: fmt.Sprintf(`%v: %s`, ErrSecondLayer, msg),
-		}
-	}
-}
+//func secondLayer() (err error) {
+//	defer wrapError(&err, ErrPermission.Error())
+//
+//	return ErrPermission
+//}
+//
+//var ErrSecondLayer = errors.New("secondLayer")
+//
+//func wrapError(err *error, msg string) {
+//	if *err != nil {
+//		*err = &QueryError{
+//			Err:   *err,
+//			Query: fmt.Sprintf(`%v: %s`, ErrSecondLayer, msg),
+//		}
+//	}
+//}
