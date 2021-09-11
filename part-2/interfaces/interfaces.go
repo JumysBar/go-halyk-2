@@ -95,6 +95,14 @@ func main() {
 	// var duck *Duck
 	// var duck Animal
 
+	// Немного наркомании
+	// var asd interface{} = &Duck{}
+	// duckAsValue, ok := asd.(Duck)
+	// if !ok {
+	//	 panic("не смог скастить интерфейс к типу Duck")
+	// }
+	// duck := &duckAsValue
+
 	// пример вызова функции с паттерном стратегия
 	err := MakeNoise(duck)
 	if err != nil {
