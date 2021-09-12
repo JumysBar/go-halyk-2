@@ -71,7 +71,7 @@ func firstLayer() error {
 	err := secondLayer()
 	if err != nil {
 		// #1
-		//return fmt.Errorf("firstLayer: %s", err)
+		return fmt.Errorf("firstLayer: %s", err)
 
 		// #2
 		//return &QueryError{
@@ -83,7 +83,7 @@ func firstLayer() error {
 		//return fmt.Errorf("firstLayer: %w", err)
 
 		// #4
-		return fmt.Errorf("firstLayer: %w", err)
+		//return fmt.Errorf("firstLayer: %w", err)
 	}
 	return nil
 }
@@ -108,7 +108,7 @@ func secondLayer() error {
 	//})
 }
 
-// Bonus
+// Bonus со звездочкой
 //func secondLayer() (err error) {
 //	defer wrapError(&err, ErrPermission.Error())
 //
