@@ -1,7 +1,7 @@
 package main
 
 import (
-	v "2_lecture/part-2/visibility"
+	v "2_lecture/lecture-4/visibility"
 	"fmt"
 )
 
