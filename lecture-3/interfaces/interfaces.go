@@ -39,23 +39,6 @@ func (s *SomeBird) Fly() error {
 	return nil
 }
 
-// MakeNoise Run Walk Fly Методы с паттерном стратегия принимающие на вход объект с реализацией интерфейса Animal
-func MakeNoise(a Animal) error {
-	return a.MakeNoise()
-}
-
-func Run(a Animal) error {
-	return a.Run()
-}
-
-func Walk(a Animal) error {
-	return a.Walk()
-}
-
-func Fly(b Bird) error {
-	return b.Fly()
-}
-
 // StructWithSwitch пример с switch-type паттерном
 func StructWithSwitch(b Bird) error {
 	//switch b.(type) { // TODO:: TAG-01
@@ -103,14 +86,14 @@ func main() {
 	// }
 	// duck := &duckAsValue
 
-	// пример вызова функции с паттерном стратегия
-	err := MakeNoise(duck)
+	// вызов функции метода унаследованного от интерфейса Animal
+	err := duck.MakeNoise()
 	if err != nil {
 		panic(err.Error())
 	}
 
-	// еще один такой пример, но с более красивой обработкой ошибки по go-way
-	if err := Fly(duck); err != nil {
+	// еще один такой пример, но с более красивой обработкой ошибки по "go-way"
+	if err := duck.Fly(); err != nil {
 		panic(err.Error())
 	}
 
@@ -140,8 +123,22 @@ func main() {
 		panic(err.Error())
 	}
 
+	// пример использования паттерна стратегия
+	p := &Polymorph{"Victor", 3, duck}
+	// вызов метода с определенным поведением
+	if err := p.FlyStrategy(); err != nil {
+		panic(err.Error())
+	}
+
+	// изменяем поведения Виктора
+	p.setAnimalType(&Penguin{})
+	// вызов метода еще раз
+	if err := p.FlyStrategy(); err != nil {
+		panic(err.Error())
+	}
+
 	// пример с возращением ошибки и вызова паники через метод с паттерном стратегия
-	if err := Run(duck); err != nil {
+	if err := duck.Run(); err != nil {
 		panic(err.Error())
 	}
 }
