@@ -1,8 +1,9 @@
 package main
 
 import (
-	v "2_lecture/lecture-4/visibility"
 	"fmt"
+
+	v "2_lecture/lecture-4/visibility"
 )
 
 func main() {
