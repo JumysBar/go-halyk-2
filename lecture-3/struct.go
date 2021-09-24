@@ -18,10 +18,10 @@ type Student struct {
 	Age   int
 	Iq    uint64
 
-	// Поле с анонимной функцией
+	// Поле с анонимной функцией. Можно заменить на после с типом func(fString string, argv ...string)
 	Logger func(fString string, argv ...string)
 
-	// Анонимная структура
+	// Анонимная структура, за пределы тестов выходит очень редко.
 	SomeStruct struct {
 		FieldOne string
 		FieldTwo int32
@@ -30,18 +30,17 @@ type Student struct {
 	// Вложенная структура (наследование на минималках)
 	Courses
 
-	// Структура как поле
+	// Структура как поле с типом Courses
 	AnotherCourses Courses
 }
 
 func main() {
-
 	// объявления и инициализированная переменной с анонимной структурой в значении
 	someAnonFunc := func(fString string, argv ...string) {
 		fmt.Printf(fString, argv) // ваша реализация logger (как пример)
 	}
 
-	// объявление структуры через var
+	// объявление структуры через var, лучше использовать ":="
 	var studentOne Student = Student{
 		Title: "Конь в пальто",
 		Age:   45,
@@ -54,11 +53,11 @@ func main() {
 		},
 	}
 
-	// присвоить нового значение в поле, которое было вложено(embedding) в структуру
+	// Присвоение нового значение в поле, которое было вложено(embedding) в структуру
 	// !!!пример, если поле Title существует и в основной структуре и во вложенной
 	studentOne.Courses.Title = "Updated Course's Title"
 
-	// Присвоение данных полю с типом []Lecture
+	// Присвоение данных полю с типом []Lecture с именем поля Lectures
 	// тут к полю из вложенной структуры мы обращаемся уже непосредственно по имени поля.
 	// без уточнения Courses.Lectures как это было с полем Title, т.к. оно (Lectures) уникальное во всей структуре
 	studentOne.Lectures = []Lecture{

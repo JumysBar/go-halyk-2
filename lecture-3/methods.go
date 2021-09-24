@@ -2,6 +2,7 @@ package main
 
 import "fmt"
 
+// Lector очередная структура для прмиера с грубокими структурами
 type Lector struct {
 	Name string
 	Age  int
@@ -22,6 +23,7 @@ func (l Lector) WrongSetName(name string) {
 	l.Name = name
 }
 
+// Course очередная структура для прмиера с грубокими структурами
 type Course struct {
 	Id    int
 	Title string
@@ -30,7 +32,7 @@ type Course struct {
 }
 
 func main() {
-	// объявление структуры через ':='
+	// объявление структуры через ':='. Самый правельный вариант по go-way
 	course := Course{
 		1,
 		"title",
@@ -41,13 +43,14 @@ func main() {
 	}
 
 	// то же самое: (&course).SetName(...)
-	// просто компилятор Golang сжалился над нами и позволят не указывать, что обращение идет адресу явно
+	// просто компилятор Golang сжалился над нами и позволяeт не указывать, что обращение идет по адресу, явно
 	course.SetName("Якубович Леонид Аркадьевич")
 	course.WrongSetName("ничего не произойдет, кроме пустой растраты ресурсов")
 	fmt.Printf("course: %#v\n", course)
 
+	// создание переменной через new()
 	courseTwo := new(Course)
-	courseTwo.SetName("вызов структуры через new()")
+	courseTwo.SetName("вызов метода структуры созданой через new()")
 	fmt.Printf("courseTwo: %#v\n", courseTwo)
 }
 
