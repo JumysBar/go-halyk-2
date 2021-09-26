@@ -26,8 +26,8 @@ func main() {
 func firstLayerWithCompare() error {
 	if err := secondLayerWithCompare(); err != nil {
 		return &MyTypeError{
-			Query: fmt.Sprintf("firstLayer: %v", err),
-			Err:   err.(*MyTypeError).Err,
+			Message: fmt.Sprintf("firstLayer: %v", err),
+			Err:     err.(*MyTypeError).Err,
 		}
 	}
 	return nil
@@ -36,7 +36,7 @@ func firstLayerWithCompare() error {
 // функция создания ошибки и обертки ее в определенный тип
 func secondLayerWithCompare() error {
 	return &MyTypeError{
-		Query: fmt.Sprintf("secondLayer: %v - %v", "например имя РОЛИ", ErrPermission),
-		Err:   ErrPermission,
+		Message: fmt.Sprintf("secondLayer: %v - %v", "например имя РОЛИ", ErrPermission),
+		Err:     ErrPermission,
 	}
 }

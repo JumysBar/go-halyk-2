@@ -9,8 +9,8 @@ var ErrPermission = errors.New("your permission is suck")
 
 // MyTypeError структура для более удобной работы с ошибками
 type MyTypeError struct {
-	Query string
-	Err   error
+	Message string
+	Err     error
 }
 
 // Проверка реализации интерфейсов
@@ -18,10 +18,10 @@ var _ error = (*MyTypeError)(nil)
 
 // Error метода для реализации интерфейса error
 func (err *MyTypeError) Error() string {
-	return err.Query
+	return err.Message
 }
 
-// Unwrap метода для реализации интерфейса xerrors.Wrapper
+// Unwrap метода для реализации интерфейса interface{Unwrap() error} в пакете errors/wrap.go
 func (err *MyTypeError) Unwrap() error {
 	return err.Err
 }

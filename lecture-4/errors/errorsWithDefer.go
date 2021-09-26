@@ -58,7 +58,7 @@ func (err *FirstLayerError) Unwrap() error {
 	return err.Err
 }
 
-// wrapError функция котоаря помогат нам обернуть любую ошибку в нежный нам тип
+// wrapErrorFirstLayer функция котоаря помогат нам обернуть любую ошибку в нежный нам тип
 func wrapErrorFirstLayer(err *error, msg string) {
 	if *err != nil {
 		*err = &FirstLayerError{
@@ -108,7 +108,7 @@ func (err *SecondLayerError) Unwrap() error {
 	return err.Err
 }
 
-// wrapError функция котоаря помогат нам обернуть любую ошибку в нежный нам тип
+// wrapErrorSecondLayer функция котоаря помогат нам обернуть любую ошибку в нежный нам тип
 func wrapErrorSecondLayer(err *error, msg string) {
 	if *err != nil {
 		*err = &SecondLayerError{
