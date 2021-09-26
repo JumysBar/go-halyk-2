@@ -48,22 +48,18 @@ func (s *SomeBird) Fly() error {
 
 // StructWithSwitch пример с switch-type паттерном
 func StructWithSwitch(b Bird) error {
-	//switch b.(type) { // TODO:: TAG-01
-	switch b := b.(type) {
+	switch b.(type) {
 	case *Duck:
-		// TODO:: TAG-01
-		// duck, ok := b.(*Duck)
-		// if !ok {
-		//	return fmt.Errorf("duck convert problem")
-		// }
-		fmt.Printf("обращение идет именно к типу УТКА: %s\n", b.DuckType)
+		duck, ok := b.(*Duck)
+		if !ok {
+			return fmt.Errorf("duck convert problem")
+		}
+		fmt.Printf("обращение идет именно к типу УТКА: %s\n", duck.DuckType)
 	case *Penguin:
-		// TODO:: TAG-01
-		// penguin, ok := b.(*Penguin)
-		// if !ok {
-		//	return fmt.Errorf("penguin convert problem")
-		// }
-		fmt.Printf("обращение идет именно к типу ПИНГВИН: %s\n", b.PenguinType)
+		penguin, ok := b.(*Penguin)
+		if !ok {
+			return fmt.Errorf("penguin convert problem %s", penguin.PenguinType)
+		}
 	default:
 		fmt.Printf("я не знаком с такой птицей %T\n", b)
 	}
@@ -132,6 +128,7 @@ func main() {
 
 	// пример использования паттерна стратегия
 	p := &Polymorph{"Victor", 3, duck}
+
 	// вызов метода с определенным поведением
 	if err := p.FlyStrategy(); err != nil {
 		panic(err.Error())
